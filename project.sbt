@@ -3,7 +3,7 @@ sbtPlugin := false
 
 name := "imce.spark.data"
 
-description := "..."
+description := "Prototyping SPARK-based analysis of IMCE OMF Schema data."
 
 moduleName := name.value
 
