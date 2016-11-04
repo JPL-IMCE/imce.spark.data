@@ -15,7 +15,7 @@ import org.apache.spark.sql.{Dataset, SparkSession}
 
 import scala.collection.immutable._
 import scala.{Array,StringContext,Unit}
-import scala.Predef.String
+import scala.Predef.{refArrayOps,String}
 
 import scala.io
 
@@ -120,11 +120,19 @@ object Example1 {
     */
   def main(args: Array[String]): Unit = {
 
-    if (args.size != 1) {
-      System.err.println(s"Usage: ${this.getClass.getSimpleName} <OMF Schema table ZIP file>")
+    System.out.println(s"args: ${args.length}")
+    args.foreach { arg =>
+      System.out.println(s"Arg: $arg")
+    }
+    if (args.length != 2) {
+      System.err.println(s"Usage: ${args(0)} <OMF Schema table ZIP file>")
       System.exit(-1)
     }
 
+    run(args(1))
+  }
+
+  def run(omfSchemaJsonZipFile: String): Unit = {
     val conf = new SparkConf().setMaster("local").setAppName(this.getClass.getSimpleName)
 
     implicit val spark = SparkSession
@@ -140,8 +148,7 @@ object Example1 {
             cause.printStackTrace()
         }
         .apply {
-          val path = args(0)
-          val zipFile = new ZipFile(path)
+          val zipFile = new ZipFile(omfSchemaJsonZipFile)
           val tables =
             zipFile
               .getEntries

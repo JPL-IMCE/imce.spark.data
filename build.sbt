@@ -49,5 +49,3 @@ lazy val core = Project("imce-spark-data", file("."))
         % Versions_omf_schema_tables.version
     )
   )
-  .dependsOn(ProjectRef(uri("file:/opt/local/imce/users/nfr/github.schema/jpl.omf.schema.tables"), "tablesJVM"))
-

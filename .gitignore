@@ -1,6 +1,6 @@
 .idea
 *~
-*links.json
+off.links.json
 target
 project/project
 local.*
